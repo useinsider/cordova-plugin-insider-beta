@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-insider" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>Insider</name>
+    <description>Insider Cordova Plugin</description>
+    <keywords>insider,cordova,cordova-ios,cordova-android</keywords>
+    <license>Apache 2.0 License</license>
+
+    <js-module name="insider" src="www/insider.js">
+        <clobbers target="insider.instance" />
+    </js-module>
+    
+    <platform name="android">
+        <framework src="src/android/insider-internal-build.gradle" custom="true" type="gradleReference"/>
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.INTERNET"/>
+            <uses-permission android:name="android.permission.WAKE_LOCK"/>
+            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+        </config-file>
+
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="insider">
+                <param name="android-package" value="insider.cordova.insider.InsiderPlugin" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <source-file src="src/android/InsiderPlugin.java" target-dir="src/insider/cordova/insider" />
+    </platform>
+
+    <platform name="ios">
+        <framework src="libsqlite3.tbd" />
+        <framework src="libicucore.tbd" />
+
+        <podspec>
+            <config>
+                <source url="https://cdn.cocoapods.org/"/>
+            </config>
+            <pods use-frameworks="true">
+                <pod name="InsiderMobile" />
+            </pods>
+        </podspec>
+
+        <header-file src="src/ios/Insider.h" target-dir="ios" />
+
+        <config-file parent="/*" target="config.xml">
+            <feature name="insider">
+                <param name="ios-package" value="insider" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <source-file src="src/ios/insider.m" target-dir="insider" />
+    </platform>
+</plugin>

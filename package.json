@@ -1,0 +1,16 @@
+{
+  "name": "cordova-plugin-insider",
+  "version": "1.0.0",
+  "description": "Insider Cordova Plugin",
+  "cordova": {
+    "id": "cordova-plugin-insider",
+    "platforms": ["android","ios"]
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "author": "",
+  "license": "ISC"
+}
